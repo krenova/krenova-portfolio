@@ -132,7 +132,7 @@
     ctx.lineTo(-3,  spread);   // right wing tip
     ctx.closePath();
 
-    ctx.fillStyle = 'rgba(37, 50, 72, 0.62)';
+    ctx.fillStyle = 'rgba(100, 112, 130, 0.45)';
     ctx.fill();
     ctx.restore();
   };

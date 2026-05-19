@@ -91,7 +91,10 @@ nav a:hover { /*!!! pseudo selector */
 
 /* only applies to the landing identifiers or id="landing" */
 #landing {
-    min-height: 80dvh; /* dvh = Dynamic View Hieght, where height will be responsive to your */
+    min-height: 100dvh; /* full viewport — About Me only visible on scroll */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* vertical centering within the 80dvh */
     align-items: center;
     text-align: center;
     border-radius: 0 0 2rem 2rem; /* top-left, top-right, btm-right, btm-left */

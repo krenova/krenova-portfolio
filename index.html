@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Portfolio | Your Name here</title>
+  <title>Portfolio | Ek Hong Lim</title>
 
   <!-- ! Apply fonts imported from Google Fonts -->
   <!-- Insert code here -->
@@ -19,6 +19,7 @@
 </head>
 
 <body>
+  <canvas id="boids-canvas"></canvas>
   <!-- ! Start of nav (Main Navigation) -->
   <nav>
     <a href="#landing">Home</a>
@@ -32,14 +33,14 @@
   <!-- ! Start of Landing section -->
   <section id="landing" class="section-padding">
     <div class="landing-content">
-      <img 
+      <img
         class="profile-pic-large"
-        src="https://placehold.co/200x200/000000/FFFFFF?text=K" 
-        alt="Profile Picture Placeholder"
+        src="./imgs/studio_pic.png"
+        alt="Ek Hong Lim"
       >
       <p>Hello, I am</p>
-      <h1>Krenova</h1>
-      <p>Jr Fullstack Developer | Mid-career Professional</p>
+      <h1>Ek Hong</h1>
+      <p> Data Science and Technology Consultant | Aspiring Entrepreneur | Educator | Fitness Enthusiast </p>
       <div class="cta-group">
         <a href="#contact">Contact Me</a>
         <a href="#">Download CV</a>
@@ -53,16 +54,16 @@
     <h2>About Me</h2>
     <div class="about-grid">
       <div class="about-image">
-        <img  
-        src="https://placehold.co/600x600/CCCCCC/6c757d?text=My+Portrait"
-          alt="Placeholder image for portrait"
+        <img
+          src="./imgs/studio_pic.png"
+          alt="Ek Hong Lim portrait"
         />
         
       </div>
       <div class="about-text">
-        <h3>My Passion? Doing things that have a positive impact.</h3>
+        <h3>Adding value and making a positive impact.</h3>
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique atque cum labore sunt molestias repudiandae exercitationem ratione fugiat doloribus provident accusamus dolores natus excepturi dignissimos consequatur, molestiae porro vero facere itaque ut? Sit tempora eos doloremque debitis voluptatum minima consectetur officia pariatur maiores dolore saepe fugit nemo necessitatibus, ab nesciunt!
+            I help organisations navigate technology, AI and advanced analytics by bridging the gap between deep technical concepts and executive-level strategy. My approach combines a consulting mindset with a focus on building scalable data infrastructure, ensuring teams are equipped to solve today's problems while prepared for tomorrow's shifts.
           </p>
          <div class="info-card-container">
           <div class="info-card">
@@ -71,13 +72,13 @@
           </div>
           <div class="info-card">
             <h4>Education</h4>
-            <p> BSc. Mechanical Engineering</p>
-            <p> MSc. Statistics</p>
-            <p> PhD. Operations Research and Analytics</p>
+            <p>BSc. Mechanical Engineering</p>
+            <p>MSc. Statistics</p>
+            <p>PhD. Operations Research and Analytics</p>
           </div>
          </div>
          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum ipsum dolore aperiam molestias ex eum doloribus tempora cum aliquam amet vero, qui dolores unde, praesentium itaque dolorem hic architecto officiis.
+            Currently recalibrating my skills towards full-stack development, agentic orchestration and harness engineering — with a focus on automating the end-to-end development lifecycle. My goal is to build tools that harness the converging worlds of software engineering and data science to create meaningful impact.
           </p>
       </div>
     </div>
@@ -89,25 +90,42 @@
       <h2>Skills</h2>
       <div class="experience-container">
          <div class="experience-card">
-             <h3>Tech Stack</h3>
+             <h3>Programming &amp; Web Dev</h3>
               <ul class="skills-list">
-                <li>HTML5 & Semantic Markup</li>
-                <li>CSS3 (and Bootstrap)</li>
-                <li>JavaScript (ES6+)</li>
-                <li>React</li>
+                <li>Python</li>
+                <li>JavaScript (ES6+) &amp; TypeScript</li>
                 <li>Java</li>
-                <li>Springboot (Maven)</li>
+                <li>R &amp; Julia</li>
+                <li>HTML5 &amp; CSS3</li>
+                <li>React &amp; Vite</li>
+                <li>Spring Boot</li>
+                <li>FastAPI &amp; Django</li>
               </ul>
          </div>
          <div class="experience-card">
-             <h3>Tools and Concepts</h3>
+             <h3>AI, Data &amp; Analytics</h3>
               <ul class="skills-list">
-                <li>Version Control (Git, Github)</li>
-                <li>Client-Server Artchitecture</li>
-                <li>API Development (Postman)</li>
-                <li>Unit Testing (Jest/jUnit)</li>
-                <li>Visual Studio Code</li>
-                <li>IntelliJ IDEA</li>
+                <li>LangChain &amp; LangGraph</li>
+                <li>Weaviate &amp; Haystack</li>
+                <li>TensorFlow &amp; Theano</li>
+                <li>PySpark &amp; Scikit-learn</li>
+                <li>Gurobi &amp; CPLEX</li>
+                <li>Econometrics &amp; ML Modelling</li>
+                <li>Langfuse &amp; OpenTelemetry</li>
+                <li>SAS &amp; SPSS</li>
+              </ul>
+         </div>
+         <div class="experience-card">
+             <h3>Cloud &amp; Tools</h3>
+              <ul class="skills-list">
+                <li>Azure, AWS &amp; GCP</li>
+                <li>PostgreSQL, MySQL &amp; MongoDB</li>
+                <li>BigQuery &amp; Hive</li>
+                <li>Tableau &amp; QlikSense</li>
+                <li>Superset &amp; Metabase</li>
+                <li>Git &amp; GitHub</li>
+                <li>VS Code &amp; IntelliJ IDEA</li>
+                <li>Docker &amp; REST APIs</li>
               </ul>
          </div>
          </div>
@@ -117,38 +135,38 @@
 
   <!-- ! Start of Projects section -->
   <section id="projects" class="section-padding">
-        <h2>Projects</h2>
+        <h2>Recent Projects</h2>
         <div class="projects-grid">
             <div class="project-card">
                 <div class="project-image project-image1">Find out more ...</div>
                 <div class="project-details">
-                    <h3>Project 1</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore aspernatur, nobis architecto mollitia consequuntur velit corrupti fugit consectetur ratione illum.</p>
+                    <h3>OptionsLens</h3>
+                    <p>A visualization tool for options simulations, modelling changes in price and Greeks across scenarios. Also serves as a portfolio management dashboard for tracking performance and running position analysis.</p>
                     <div class="project-links">
-            <a href="#">View Demo</a>
-            <a href="#">GitHub Repo</a>
+            <a href="https://optionslens.krenova.co/" target="_blank" rel="noopener">View Demo</a>
+            <a href="https://optionslens.krenova.co/">GitHub Repo</a>
           </div>
         </div>
       </div>
             <div class="project-card">
                 <div class="project-image project-image2">Find out more ...</div>
                 <div class="project-details">
-                    <h3>Project 2</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore aspernatur, nobis architecto mollitia consequuntur velit corrupti fugit consectetur ratione illum.</p>
+                    <h3>SilverGuide</h3>
+                    <p>An educational resource helping elderly users navigate modern technology and stay safe from scams. Features an interactive AI chatbot that can quiz, guide, and teach users on the topics covered across the site.</p>
                     <div class="project-links">
-            <a href="#">View Demo</a>
-            <a href="#">GitHub Repo</a>
+            <a href="https://silverguide.krenova.co/" target="_blank" rel="noopener">View Demo</a>
+            <a href="https://github.com/Radio-Alastor/team-orange/tree/chatbot">GitHub Repo</a>
           </div>
         </div>
       </div>
             <div class="project-card">
                 <div class="project-image project-image3">Find out more ...</div>
                 <div class="project-details">
-                    <h3>Project 3</h3>
-                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolores quas perspiciatis itaque? Dolore vel consequuntur, explicabo similique repudiandae eligendi ex aspernatur corporis. Incidunt similique aut mollitia voluptatibus vitae doloribus eum aliquam eius reprehenderit ut odit, laborum ullam rem ad maxime soluta. Eum magnam mollitia obcaecati nihil architecto vel porro nemo.</p>
+                    <h3>Agentic Scaffold</h3>
+                    <p>A TypeScript scaffold for building composable agentic AI systems, with pre-built agent patterns for research, orchestration, and skills management. Powered by Vercel AI SDKs with Langfuse observability built in — easily extended to power personalized agents, coding agents and more.</p>
           <div class="project-links">
-            <a href="#">View Demo</a>
-            <a href="#">GitHub Repo</a>
+            <a href="https://github.com/krenova/vercel-agentic-scaffold">View Demo</a>
+            <a href="https://github.com/krenova/vercel-agentic-scaffold" target="_blank" rel="noopener">GitHub Repo</a>
           </div>
         </div>
       </div>
@@ -161,18 +179,23 @@
     <h2>Contact Me</h2>
     <p>Let&apos;s connect</p>
     <div class="contact-links">
-      <a href="">
-        <span>✉️</span> Email <!-- span allows us to target the emojis to control it -->
-      </a>
-      <a href="">
+      <a href="https://sg.linkedin.com/in/ekhong-lim" target="_blank" rel="noopener">
         <span>🔗</span> LinkedIn
       </a>
-      <a href="">
-        <span>📷</span> Instagram
+      <a href="https://github.com/krenova" target="_blank" rel="noopener">
+        <span>💻</span> GitHub
       </a>
     </div>
   </section>
   <!-- ! End of Contact section -->
+
+  <!-- Boids info badge -->
+  <div id="boids-info">
+    <span class="boids-label">✦ Boids Simulation</span>
+    <div class="boids-desc">
+      <strong>Craig Reynolds' Boids (1986)</strong> generates the flocking behaviour using three emergent rules: <em>separation</em>, <em>alignment</em>, and <em>cohesion</em>. Despite the simplicity, it has informed research in collective animal behaviour, swarm robotics, crowd dynamics, epidemiological modelling, and autonomous vehicle coordination.
+    </div>
+  </div>
 
   <!-- ! Start of Footer -->
   <footer>
@@ -190,6 +213,8 @@
     </p>
   </footer>
   <!-- ! End of Footer -->
+
+  <script src="./js/boids.js"></script>
 </body>
 
 </html>

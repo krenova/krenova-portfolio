@@ -1,4 +1,9 @@
 
+/* Base page background — sits behind the fixed boids canvas */
+html {
+    background-color: var(--light-bg-color);
+}
+
 /* CSS Variables for easy theme adjustments */
 :root {
     --primary-color: #1a1a1a;
@@ -26,7 +31,7 @@ body {
     font-family: "Lato", sans-serif; /* fallback font is the browser's system font */
     line-height: 1.6rem;
     color: var(--primary-color); /* affects the fonts */
-    background-color: var(--white); 
+    background-color: transparent;
     scroll-behavior: smooth;
 }
 
@@ -89,8 +94,18 @@ nav a:hover { /*!!! pseudo selector */
     min-height: 80dvh; /* dvh = Dynamic View Hieght, where height will be responsive to your */
     align-items: center;
     text-align: center;
-    background-color: var(--light-bg-color);
     border-radius: 0 0 2rem 2rem; /* top-left, top-right, btm-right, btm-left */
+}
+
+/* Boids canvas — fixed full-page background layer */
+#boids-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: -1;
 }
 
 
@@ -101,7 +116,6 @@ nav a:hover { /*!!! pseudo selector */
 
 /* safest most targeted approach */
 .landing-content {
-    background-color: var(--light-bg-color); /* #6c757d; */
     display: flex; /* flex or block but flex is generally better at managing content */
     flex-direction: column;
     align-items: center;
@@ -194,7 +208,6 @@ nav a:hover { /*!!! pseudo selector */
 /* --- ABOUT ME SECTION --- */
 /************************************************************************************/
 #about {
-    background-color: var(--white);
 }
 
     .about-grid {
@@ -264,7 +277,6 @@ nav a:hover { /*!!! pseudo selector */
 /************************************************************************************/
     
 #experience {
-    background-color: var(--light-bg-color);
 }
 
 .experience-container {
@@ -366,7 +378,7 @@ nav a:hover { /*!!! pseudo selector */
 }
 
 .project-image1 {
-    background-image: url("../imgs/mobile-app.jpg");
+    background-image: url("../imgs/optionslens.png");
     background-size: cover;
     object-fit: cover;
     background-repeat: no-repeat;
@@ -374,7 +386,7 @@ nav a:hover { /*!!! pseudo selector */
 }
 
 .project-image2 {
-    background-image: url("../imgs/data-tracking.jpg");
+    background-image: url("../imgs/silverguide.png");
     background-size: cover;
     object-fit: cover;
     background-repeat: no-repeat;
@@ -382,11 +394,10 @@ nav a:hover { /*!!! pseudo selector */
 }
 
 .project-image3 {
-    background-image: url("../imgs/web-design.jpg");
-    background-size: cover;
-    object-fit: cover;
+    background-image: url("../imgs/agentic-scaffold.png");
+    background-size: contain;
     background-repeat: no-repeat;
-    background-position: center; /* keep center in view */
+    background-position: center;
 }
 
 .project-details {
@@ -443,7 +454,6 @@ nav a:hover { /*!!! pseudo selector */
 /************************************************************************************/
 #contact {
     text-align: center;
-    background-color: var(--light-bg-color);
 }
 
 #contact p {
@@ -479,13 +489,74 @@ nav a:hover { /*!!! pseudo selector */
     background-color: #0072b1;
 }
 
-.contact-links a:hover:nth-of-type(3) { /* a:hover:nth-child(2) */
-    background-color: #833AB4;
+.contact-links a:hover:nth-of-type(3) {
+    background-color: #24292e; /* GitHub dark */
 }
 
 .contact-links a span {
     margin-right: 0.625rem;
     font-size: 1.5rem;
+}
+
+/************************************************************************************/
+
+
+/************************************************************************************/
+/* --- Boids Info Badge --- */
+/************************************************************************************/
+
+#boids-info {
+    position: fixed;
+    top: 4.5rem;   /* clears the sticky nav bar */
+    right: 1.25rem;
+    z-index: 500;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end; /* right-align the card under the pill */
+    gap: 0.5rem;
+    cursor: default;
+}
+
+.boids-label {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    color: rgba(37, 50, 72, 0.55);
+    background: rgba(255, 255, 255, 0.55);
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(37, 50, 72, 0.15);
+    border-radius: 2rem;
+    padding: 0.25rem 0.75rem;
+    transition: color var(--transition-speed), background var(--transition-speed);
+    user-select: none;
+}
+
+.boids-desc {
+    font-size: 0.72rem;
+    line-height: 1.5;
+    color: rgba(37, 50, 72, 0.9);
+    background: rgba(255, 255, 255, 0.82);
+    backdrop-filter: blur(6px);
+    border: 1px solid rgba(37, 50, 72, 0.15);
+    border-radius: 0.5rem;
+    padding: 0.65rem 0.85rem;
+    max-width: 17rem;
+    /* hidden until hover */
+    opacity: 0;
+    transform: translateY(0.4rem);
+    pointer-events: none;
+    transition: opacity var(--transition-speed), transform var(--transition-speed);
+}
+
+#boids-info:hover .boids-label {
+    color: rgba(37, 50, 72, 0.9);
+    background: rgba(255, 255, 255, 0.82);
+}
+
+#boids-info:hover .boids-desc {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
 }
 
 /************************************************************************************/
@@ -501,7 +572,6 @@ footer {
     text-align: center;
     font-size: 1.25rem;
     border-top: 0.0625rem solid var(--light-bg-color);
-    background-color: var(--white);
     margin-top: 0.625rem;
 }
 

@@ -258,13 +258,13 @@ nav a:hover { /*!!! pseudo selector */
     }
 
     .info-card {
-    border: 1px solid #ddd;
+    border: 1px solid rgba(0,0,0,0.1);
     border-radius: var(--border-radius);
-    background-color: var(--light-bg-color);
+    background-color: var(--white);
     text-align: center;
     flex: 1;
     padding: 1.25rem;
-    box-shadow: 0 0.125rem 0.3125rem rgba(0,0,0,0.1);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
     }
 
 .info-card h4 {
@@ -624,7 +624,7 @@ footer div a:hover{
 footer p {
     font-size: 0.75rem;
     margin-top: 0.625rem;
-    color: var(--sco)
+    color: var(--secondary-color);
 }
 
 /************************************************************************************/
@@ -645,12 +645,14 @@ footer p {
 .timeline-container::after {
     content: '';
     position: absolute;
-    width: 2px;
+    width: 3px;
     background: var(--accent-color);
     top: 0;
     bottom: 0;
     left: 20px;
     margin-left: 0;
+    z-index: 1;
+    opacity: 1;
 }
 
 .timeline-item {
@@ -681,8 +683,17 @@ footer p {
     font-weight: 700;
 }
 
+.timeline-content {
+    background-color: var(--white);
+    padding: 1.5rem;
+    border-radius: var(--border-radius);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    margin-top: 0.5rem;
+    overflow: visible; /* Ensure bullets/shadows aren't clipped */
+}
+
 .timeline-content h3 {
-    margin: 0.3rem 0;
+    margin: 0 0 0.5rem 0;
     font-size: 1.25rem;
     color: var(--primary-color);
 }
@@ -742,7 +753,8 @@ footer p {
 @media (min-width: 56.26rem) {
     .timeline-v2.timeline-container::after {
         left: 50%;
-        margin-left: -1px;
+        margin-left: -1.5px;
+        width: 3px;
     }
 
     .timeline-v2 .timeline-item {

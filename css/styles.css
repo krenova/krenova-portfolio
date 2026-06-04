@@ -276,20 +276,20 @@ nav a:hover { /*!!! pseudo selector */
 
 
 /************************************************************************************/
-/* --- Experience Section--- */
+/* --- Skills Section--- */
 /************************************************************************************/
     
-#experience {
+#skills {
 }
 
-.experience-container {
+.skills-container {
     display: flex;
     gap:2.5rem;
     /* align-items: center; /* vertical align inside row layout */
     justify-items: center; /* align content center horizontally */
 }
 
-.experience-card {
+.skills-card {
     border: 1px solid black;
     flex: 1;
     min-width: 18.75rem;
@@ -300,7 +300,7 @@ nav a:hover { /*!!! pseudo selector */
     text-align: center;
 }
 
-.experience-card h3 {
+.skills-card h3 {
     color: var(--primary-color);
     margin-bottom: 1.5625rem;
     border-bottom: 0.125rem solid var(--accent-color);
@@ -601,6 +601,144 @@ footer p {
 
 
 
+/* --- Timeline --- */
+.timeline-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    position: relative;
+    padding: 2.5rem 0;
+}
+
+.timeline-container::after {
+    content: '';
+    position: absolute;
+    width: 2px;
+    background: var(--accent-color);
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    margin-left: -1px;
+}
+
+.timeline-item {
+    padding: 1.25rem 3.125rem;
+    position: relative;
+    background-color: inherit;
+    width: 50%;
+}
+
+.timeline-item.left {
+    left: 0;
+    text-align: right;
+}
+
+.timeline-item.right {
+    left: 50%;
+    text-align: left;
+}
+
+.timeline-dot {
+    position: absolute;
+    width: 1rem;
+    height: 1rem;
+    background-color: var(--white);
+    border: 3px solid var(--accent-color);
+    top: 1.5rem;
+    border-radius: 50%;
+    z-index: 10;
+}
+
+.timeline-item.left .timeline-dot {
+    right: -0.5rem;
+}
+
+.timeline-item.right .timeline-dot {
+    left: -0.5rem;
+}
+
+.timeline-date {
+    font-size: 0.9rem;
+    color: var(--secondary-color);
+    margin-bottom: 0.3rem;
+    font-weight: 700;
+}
+
+.timeline-content h3 {
+    margin: 0.3rem 0;
+    font-size: 1.25rem;
+    color: var(--primary-color);
+}
+
+.timeline-content p {
+    margin: 0;
+    color: var(--secondary-color);
+    font-style: italic;
+}
+
+.concurrent-list {
+    list-style: none;
+    padding: 0;
+    margin: 0.5rem 0 0 0;
+    text-align: inherit;
+}
+
+.concurrent-list li {
+    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+}
+
+.concurrent-list li strong {
+    display: inline-block;
+    color: var(--primary-color);
+}
+
+.concurrent-list li em {
+    display: inline-block;
+    font-size: 0.9rem;
+    color: var(--secondary-color);
+    margin-left: 0.5rem;
+    font-style: italic;
+}
+
+/* Specific styling for achievements/impact within roles */
+.timeline-content .impact-snippet {
+    display: block;
+    margin: 0.5rem 0 0.5rem 2rem !important; /* Specificity and extra depth */
+    font-size: 0.88rem;
+    line-height: 1.5;
+    color: var(--secondary-color);
+    font-style: normal;
+    position: relative;
+    width: auto;
+}
+
+.timeline-content .impact-snippet::before {
+    content: "•";
+    color: var(--accent-color);
+    position: absolute;
+    left: -1.5rem;
+    font-weight: bold;
+}
+
+/* --- Timeline V2 (Single Column Grouped) --- */
+.timeline-v2.timeline-container::after {
+    left: 20px;
+    margin-left: 0;
+}
+
+.timeline-v2 .timeline-item {
+    width: 100%;
+    padding-left: 50px;
+    padding-right: 20px;
+    text-align: left !important;
+    left: 0 !important;
+}
+
+.timeline-v2 .timeline-dot {
+    left: 12px !important;
+    right: auto !important;
+}
+
 /************************************************************************************/
 /* --- Responsive Design (Media Queries)--- */
 /************************************************************************************/
@@ -611,8 +749,29 @@ footer p {
     white-space: nowrap;
     }
 
-    .experience-container {
+    .skills-container {
     flex-direction: column;
+    }
+
+    /* Timeline Mobile Reset */
+    .timeline-container::after {
+        left: 20px;
+    }
+
+    .timeline-item {
+        width: 100%;
+        padding-left: 50px;
+        padding-right: 20px;
+        text-align: left !important;
+    }
+
+    .timeline-item.right {
+        left: 0;
+    }
+
+    .timeline-dot {
+        left: 12px !important;
+        right: auto !important;
     }
 
     .skills-list li {
@@ -631,7 +790,7 @@ footer p {
     flex-direction: column;
     }
 
-    .experience-container {
+    .skills-container {
     flex-direction: column;
     }
 

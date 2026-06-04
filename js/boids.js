@@ -16,7 +16,16 @@
   const COH_FORCE   = 0.004;
   const MOUSE_FORCE = 0.045; // pull toward cursor
 
+  // --- Dash / Flick Configuration ---
+  const DASH_MAX_SPEED = 14.0;
+  const FLICK_WINDOW   = 200;  // ms window to measure velocity
+  const FLICK_VELOCITY = 4;  // Increased from 0.4 to 1.2 to ignore slow movements
+  const DASH_STRENGTH  = 0.45; // Increased base force for more impact when triggered
+  const DASH_DECAY     = 0.94; // multiplier per frame
+
   let mouseX = null, mouseY = null;
+  let mouseHistory = []; // [{x, y, t}]
+  let dashX = 0, dashY = 0;
 
   // Size the pixel buffer to the full viewport
   function resize() {
@@ -29,8 +38,54 @@
   // Track mouse in canvas-local coordinates
   document.addEventListener('mousemove', function (e) {
     const r = canvas.getBoundingClientRect();
-    mouseX = e.clientX - r.left;
-    mouseY = e.clientY - r.top;
+    const mx = e.clientX - r.left;
+    const my = e.clientY - r.top;
+    mouseX = mx;
+    mouseY = my;
+
+    const now = Date.now();
+    mouseHistory.push({ x: mx, y: my, t: now });
+
+    // Prune history older than FLICK_WINDOW
+    while (mouseHistory.length > 0 && now - mouseHistory[0].t > FLICK_WINDOW) {
+      mouseHistory.shift();
+    }
+
+    // Detect flick: calculate velocity over the current window
+    if (mouseHistory.length > 1) {
+      const oldest = mouseHistory[0];
+      const dt = now - oldest.t;
+
+      if (dt > 20) { // Require a small time delta for stable velocity calculation
+        const dx = mx - oldest.x;
+        const dy = my - oldest.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        const speed = dist / dt; // pixels per millisecond
+
+        if (speed > FLICK_VELOCITY) {
+          // Accumulate dash velocity rather than resetting it.
+          // We scale the added strength by how much the speed exceeds the threshold.
+          const intensity = Math.min(3.0, speed / FLICK_VELOCITY);
+          dashX += (dx / dist) * DASH_STRENGTH * intensity;
+          dashY += (dy / dist) * DASH_STRENGTH * intensity;
+
+          // Cap the total dash force to avoid uncontrollable speeds
+          const totalDash = Math.sqrt(dashX * dashX + dashY * dashY);
+          const MAX_DASH_BOOST = 8.0;
+          if (totalDash > MAX_DASH_BOOST) {
+            dashX = (dashX / totalDash) * MAX_DASH_BOOST;
+            dashY = (dashY / totalDash) * MAX_DASH_BOOST;
+          }
+
+          // Instead of clearing all history, we prune most of it to prevent 
+          // redundant triggers on the same movement segment, but keep the 
+          // last few points to maintain a smooth velocity window.
+          if (mouseHistory.length > 2) {
+            mouseHistory.splice(0, mouseHistory.length - 2);
+          }
+        }
+      }
+    }
   });
 
   // --- Boid class ---
@@ -94,11 +149,23 @@
       this.vy += (mdy / md) * MOUSE_FORCE;
     }
 
+    // Apply dash force if active
+    var dashSpd = Math.sqrt(dashX * dashX + dashY * dashY);
+    if (dashSpd > 0.01) {
+      this.vx += dashX;
+      this.vy += dashY;
+    }
+
     // Clamp to speed limits
     var spd = Math.sqrt(this.vx * this.vx + this.vy * this.vy);
-    if (spd > MAX_SPEED) {
-      this.vx = (this.vx / spd) * MAX_SPEED;
-      this.vy = (this.vy / spd) * MAX_SPEED;
+    
+    // Smooth transition for max speed: linearly interpolate between normal and dash speed based on dash intensity
+    // We use a denominator of 4.0 to make the transition smoother as dash force accumulates.
+    var currentMax = MAX_SPEED + (DASH_MAX_SPEED - MAX_SPEED) * Math.min(1, dashSpd / 4.0);
+
+    if (spd > currentMax) {
+      this.vx = (this.vx / spd) * currentMax;
+      this.vy = (this.vy / spd) * currentMax;
     } else if (spd < MIN_SPEED && spd > 0) {
       this.vx = (this.vx / spd) * MIN_SPEED;
       this.vy = (this.vy / spd) * MIN_SPEED;
@@ -144,6 +211,11 @@
   // Animation loop — update all positions first, then draw (avoids directional bias)
   function loop() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // Decay dash momentum
+    dashX *= DASH_DECAY;
+    dashY *= DASH_DECAY;
+
     for (var i = 0; i < boids.length; i++) boids[i].update(boids);
     for (var i = 0; i < boids.length; i++) boids[i].draw();
     requestAnimationFrame(loop);

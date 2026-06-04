@@ -26,6 +26,45 @@
   let mouseX = null, mouseY = null;
   let mouseHistory = []; // [{x, y, t}]
   let dashX = 0, dashY = 0;
+  let isSimulationRunning = localStorage.getItem('boids-running') !== 'false';
+
+  const toggleBtn = document.getElementById('boids-toggle');
+  const toggleIcon = toggleBtn ? toggleBtn.querySelector('.toggle-icon') : null;
+
+  function updateVisuals(running) {
+    if (!toggleBtn || !toggleIcon) return;
+    if (running) {
+      canvas.style.display = 'block';
+      toggleBtn.classList.remove('off');
+      toggleIcon.textContent = 'ON';
+    } else {
+      canvas.style.display = 'none';
+      toggleBtn.classList.add('off');
+      toggleIcon.textContent = 'OFF';
+    }
+  }
+
+  // Initial state
+  updateVisuals(isSimulationRunning);
+
+  function handleToggle() {
+    isSimulationRunning = !isSimulationRunning;
+    localStorage.setItem('boids-running', isSimulationRunning);
+    updateVisuals(isSimulationRunning);
+    if (isSimulationRunning) {
+      requestAnimationFrame(loop);
+    }
+  }
+
+  if (toggleBtn) {
+    toggleBtn.addEventListener('click', handleToggle);
+  }
+
+  const boidsLabel = document.querySelector('.boids-label');
+  if (boidsLabel) {
+    boidsLabel.style.cursor = 'pointer';
+    boidsLabel.addEventListener('click', handleToggle);
+  }
 
   // Size the pixel buffer to the full viewport
   function resize() {
@@ -210,6 +249,7 @@
 
   // Animation loop — update all positions first, then draw (avoids directional bias)
   function loop() {
+    if (!isSimulationRunning) return;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     // Decay dash momentum
